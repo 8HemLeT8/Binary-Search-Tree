@@ -1,4 +1,6 @@
 #include <cstdio>
+#include<stdlib.h> 
+
 struct node 
 {
     int value;
@@ -35,20 +37,20 @@ class Tree{
     public:
    
     bool insert(int i){
-        if(rootNode.value == NULL){
-            rootNode.value=i;
+        if(rootNode->value == NULL){
+            rootNode->value=i;
             return true;
         }
-        node *temp=&rootNode;
-        node *troot=&rootNode;
+        node *temp=rootNode;
         while (true){ 
             if(i<temp->value){
                 node* prnt =temp;
                 temp = temp->left;
                 
                 if(temp->value=NULL){
-                    temp->value=i;
+                  temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
+                    temp->left=temp->right=NULL;
                     numOfNodes++;
                     return true;
             }
@@ -58,8 +60,9 @@ class Tree{
                 temp = temp->right;
                 
                 if(temp->value=NULL){
-                    temp->value=i;
+                  temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
+                    temp->left=temp->right=NULL;
                     numOfNodes++;
                     return true;
             }
