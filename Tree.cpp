@@ -1,14 +1,8 @@
 #include <cstdio>
-<<<<<<< HEAD
 #include <stdexcept>
 #include <sstream>
 
 struct node
-=======
-#include<stdlib.h> 
-
-struct node 
->>>>>>> 01992ebdd12829653a8ed2aead83e2e857265cbe
 {
     int value;
     node *parent;
@@ -43,36 +37,11 @@ class Tree
         }
     }
 
-<<<<<<< HEAD
-  public:
-    bool insert(int i)
-    {
-        if (rootNode.value == NULL)
-        {
-            rootNode.value = i;
-            return true;
-        }
-        node *temp = &rootNode;
-        node *troot = &rootNode;
-        while (true)
-        {
-            if (i < temp->value)
-            {
-                node *prnt = temp;
-                temp = temp->left;
-
-                if (temp->value = NULL)
-                {
-                    temp->value = i;
-                    temp->parent = prnt;
-=======
     public:
    
     bool insert(int i){
         if(rootNode->value == NULL){
-            rootNode=(node*)(malloc(sizeof(node)));
             rootNode->value=i;
-            rootNode->parent=rootNode->left=rootNode->right=NULL;
             return true;
         }
         node *temp=rootNode;
@@ -85,7 +54,6 @@ class Tree
                     temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
                     temp->left=temp->right=NULL;
->>>>>>> 01992ebdd12829653a8ed2aead83e2e857265cbe
                     numOfNodes++;
                     return true;
                 }
@@ -94,19 +62,11 @@ class Tree
             {
                 node *prnt = temp;
                 temp = temp->right;
-<<<<<<< HEAD
-
-                if (temp->value = NULL)
-                {
-                    temp->value = i;
-                    temp->parent = prnt;
-=======
                 
                 if(temp->value=NULL){
                     temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
                     temp->left=temp->right=NULL;
->>>>>>> 01992ebdd12829653a8ed2aead83e2e857265cbe
                     numOfNodes++;
                     return true;
                 }
