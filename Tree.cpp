@@ -1,5 +1,8 @@
 #include <cstdio>
-struct node 
+#include <stdexcept>
+#include <sstream>
+
+struct node
 {
     int value;
     node *parent;
@@ -7,12 +10,13 @@ struct node
     node *right;
 };
 
-class Tree{
-    private:
+class Tree
+{
+  private:
     node *rootNode;
     int numOfNodes;
-    
-    node *search (int num)
+
+    node *search(int num)
     {
         SearchHelper(num, rootNode);
     }
@@ -23,56 +27,62 @@ class Tree{
         {
             return curr;
         }
-        else if (num > curr->value){
-            SearchHelper(num,curr->right);
+        else if (num > curr->value)
+        {
+            SearchHelper(num, curr->right);
         }
         else
         {
-            SearchHelper(num,curr->left);
+            SearchHelper(num, curr->left);
         }
     }
 
-    public:
-   
-    bool insert(int i){
-        if(rootNode.value == NULL){
-            rootNode.value=i;
+  public:
+    bool insert(int i)
+    {
+        if (rootNode.value == NULL)
+        {
+            rootNode.value = i;
             return true;
         }
-        node *temp=&rootNode;
-        node *troot=&rootNode;
-        while (true){ 
-            if(i<temp->value){
-                node* prnt =temp;
+        node *temp = &rootNode;
+        node *troot = &rootNode;
+        while (true)
+        {
+            if (i < temp->value)
+            {
+                node *prnt = temp;
                 temp = temp->left;
-                
-                if(temp->value=NULL){
-                    temp->value=i;
-                    temp->parent=prnt;
+
+                if (temp->value = NULL)
+                {
+                    temp->value = i;
+                    temp->parent = prnt;
                     numOfNodes++;
                     return true;
+                }
             }
-            }
-            else if(i>temp->value){
-                node* prnt =temp;
+            else if (i > temp->value)
+            {
+                node *prnt = temp;
                 temp = temp->right;
-                
-                if(temp->value=NULL){
-                    temp->value=i;
-                    temp->parent=prnt;
+
+                if (temp->value = NULL)
+                {
+                    temp->value = i;
+                    temp->parent = prnt;
                     numOfNodes++;
                     return true;
+                }
             }
-            }
-            else{
+            else
+            {
                 return false;
             }
-
         }
     }
     bool remove(int num)
     {
-
     }
     int size()
     {
@@ -87,20 +97,44 @@ class Tree{
         }
         return true;
     }
-    int root(){
+    int root()
+    {
         return rootNode->value;
     }
-    int parent(int num){
-
+    int parent(int num)
+    {
+        node *temp = search(num);
+        if (temp == NULL)
+        {
+            std::ostringstream oss;
+            oss << "The number " << num << " isn't in the tree";
+            throw std::invalid_argument(oss.str());
+        }
+        return temp->parent->value;
     }
-    int left(int num){
-
+    int left(int num)
+    {
+        node *temp = search(num);
+        if (temp == NULL)
+        {
+            std::ostringstream oss;
+            oss << "The number " << num << " isn't in the tree";
+            throw std::invalid_argument(oss.str());
+        }
+        return temp->left->value;
     }
-    int right(int num){
-
+    int right(int num)
+    {
+        node *temp = search(num);
+        if (temp == NULL)
+        {
+            std::ostringstream oss;
+            oss << "The number " << num << " isn't in the tree";
+            throw std::invalid_argument(oss.str());
+        }
+        return temp->right->value;
     }
     void print()
     {
-
     }
 };
