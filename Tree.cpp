@@ -21,9 +21,42 @@ class Tree{
     }
 
     public:
-    bool insert(int num)
-    {
+   
+    bool insert(int i){
+        if(root.value == NULL){
+            root.value=i;
+            return true;
+        }
+        node *temp=&root;
+        node *troot=&root;
+        while (true){ 
+            if(i<temp->value){
+                node* prnt =temp;
+                temp = temp->left;
+                
+                if(temp->value=NULL){
+                    temp->value=i;
+                    temp->parent=prnt;
+                    size++;
+                    return true;
+            }
+            }
+            else if(i>temp->value){
+                node* prnt =temp;
+                temp = temp->right;
+                
+                if(temp->value=NULL){
+                    temp->value=i;
+                    temp->parent=prnt;
+                    size++;
+                    return true;
+            }
+            }
+            else{
+                return false;
+            }
 
+        }
     }
     bool remove(int num)
     {
