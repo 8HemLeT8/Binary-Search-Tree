@@ -81,10 +81,10 @@ class Tree{
     }
     bool contains(int num)
     {
-
+        node *temp
     }
     int root(){
-        return rootNode.value;
+        return rootNode->value;
     }
     int parent(int num){
 
