@@ -48,7 +48,7 @@ class Tree{
                 temp = temp->left;
                 
                 if(temp->value=NULL){
-                  temp=(node*)(malloc(sizeof(node)));
+                    temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
                     temp->left=temp->right=NULL;
                     numOfNodes++;
@@ -60,7 +60,7 @@ class Tree{
                 temp = temp->right;
                 
                 if(temp->value=NULL){
-                  temp=(node*)(malloc(sizeof(node)));
+                    temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
                     temp->left=temp->right=NULL;
                     numOfNodes++;
