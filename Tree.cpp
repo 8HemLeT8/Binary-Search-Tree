@@ -1,31 +1,12 @@
-#include <cstdio>
-#include <stdexcept>
-#include <sstream>
-#include <cstdlib>
-#include <iostream>
-
+#include "Tree.hpp"
 using namespace std;
 
-struct node
-{
-    int value;
-    node *parent;
-    node *left;
-    node *right;
-};
-
-class Tree
-{
-  private:
-    node *rootNode;
-    int numOfNodes;
-
-    node *search(int num)
+    node *Tree::search(int num)
     {
         SearchHelper(num, rootNode);
     }
 
-    node *SearchHelper(int num, node *curr)
+    node *Tree::SearchHelper(int num, node *curr)
     {
         if (curr == NULL || curr->value == num)
         {
@@ -40,9 +21,7 @@ class Tree
             SearchHelper(num, curr->left);
         }
     }
-
-  public:
-    bool insert(int i)
+    bool Tree::insert(int i)
     {
         if (rootNode->value == NULL)
         {
@@ -88,15 +67,15 @@ class Tree
             }
         }
     }
-    bool remove(int num)
+    bool Tree::remove(int num)
     {
         // Case 1
     }
-    int size()
+    int Tree::size()
     {
         return numOfNodes;
     }
-    bool contains(int num)
+    bool Tree::contains(int num)
     {
         node *temp = search(num);
         if (temp == NULL)
@@ -105,11 +84,11 @@ class Tree
         }
         return true;
     }
-    int root()
+    int Tree::root()
     {
         return rootNode->value;
     }
-    int parent(int num)
+    int Tree::parent(int num)
     {
         node *temp = search(num);
         if (temp == NULL)
@@ -120,7 +99,7 @@ class Tree
         }
         return temp->parent->value;
     }
-    int left(int num)
+    int Tree::left(int num)
     {
         node *temp = search(num);
         if (temp == NULL)
@@ -131,7 +110,7 @@ class Tree
         }
         return temp->left->value;
     }
-    int right(int num)
+    int Tree::right(int num)
     {
         node *temp = search(num);
         if (temp == NULL)
@@ -142,11 +121,11 @@ class Tree
         }
         return temp->right->value;
     }
-    void print()
+    void Tree::print()
     {
         inOrder(rootNode);
     }
-    void inOrder(node *root)
+    void Tree::inOrder(node *root)
     {
         if (root == NULL)
         {
@@ -156,4 +135,3 @@ class Tree
         cout << root->value << ",";
         inOrder(root->right);
     }
-};
