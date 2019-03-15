@@ -30,7 +30,6 @@ class Tree{
         {
             SearchHelper(num,curr->left);
         }
-        
     }
 
     public:
@@ -81,7 +80,12 @@ class Tree{
     }
     bool contains(int num)
     {
-        node *temp
+        node *temp = search(num);
+        if (temp == NULL)
+        {
+            return false;
+        }
+        return true;
     }
     int root(){
         return rootNode->value;
