@@ -39,21 +39,21 @@ class Tree
 
     public:
    
-    bool insert(int i){
+   bool insert(int i){
         if(rootNode->value == NULL){
             rootNode=(node*)(malloc(sizeof(node)));
             rootNode->value=i;
             rootNode->parent=rootNode->left=rootNode->right=NULL;
             return true;
         }
-        node temp=rootNode;
+        node *temp=rootNode;
         while (true){ 
             if(i<temp->value){
-                node prnt =temp;
+                node* prnt =temp;
                 temp = temp->left;
-
+                
                 if(temp->value=NULL){
-                    temp=(node)(malloc(sizeof(node)));
+                    temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
                     temp->left=temp->right=NULL;
                     numOfNodes++;
@@ -61,9 +61,9 @@ class Tree
             }
             }
             else if(i>temp->value){
-                node prnt =temp;
+                node* prnt =temp;
                 temp = temp->right;
-
+                
                 if(temp->value=NULL){
                     temp=(node*)(malloc(sizeof(node)));
                     temp->parent=prnt;
