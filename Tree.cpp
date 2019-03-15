@@ -70,7 +70,9 @@ class Tree
    
     bool insert(int i){
         if(rootNode->value == NULL){
+            rootNode=(node*)(malloc(sizeof(node)));
             rootNode->value=i;
+            rootNode->parent=rootNode->left=rootNode->right=NULL;
             return true;
         }
         node *temp=rootNode;
