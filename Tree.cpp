@@ -1,5 +1,5 @@
 #include <cstdio>
-typedef struct node 
+struct node 
 {
     int value;
     node *parent;
@@ -9,26 +9,39 @@ typedef struct node
 
 class Tree{
     private:
-    node root;
-    int size;
+    node *rootNode;
+    int numOfNodes;
     
-    node *search(int num)
+    node *search (int num)
     {
-        if (root == NULL)
+        SearchHelper(num, rootNode);
+    }
+
+    node *SearchHelper(int num, node *curr)
+    {
+        if (curr == NULL || curr->value == num)
         {
-            return NULL;
+            return curr;
         }
+        else if (num > curr->value){
+            SearchHelper(num,curr->right);
+        }
+        else
+        {
+            SearchHelper(num,curr->left);
+        }
+        
     }
 
     public:
    
     bool insert(int i){
-        if(root.value == NULL){
-            root.value=i;
+        if(rootNode.value == NULL){
+            rootNode.value=i;
             return true;
         }
-        node *temp=&root;
-        node *troot=&root;
+        node *temp=&rootNode;
+        node *troot=&rootNode;
         while (true){ 
             if(i<temp->value){
                 node* prnt =temp;
@@ -37,7 +50,7 @@ class Tree{
                 if(temp->value=NULL){
                     temp->value=i;
                     temp->parent=prnt;
-                    size++;
+                    numOfNodes++;
                     return true;
             }
             }
@@ -48,7 +61,7 @@ class Tree{
                 if(temp->value=NULL){
                     temp->value=i;
                     temp->parent=prnt;
-                    size++;
+                    numOfNodes++;
                     return true;
             }
             }
@@ -64,14 +77,14 @@ class Tree{
     }
     int size()
     {
-        return size;
+        return numOfNodes;
     }
     bool contains(int num)
     {
 
     }
     int root(){
-        return root.value;
+        return rootNode.value;
     }
     int parent(int num){
 
