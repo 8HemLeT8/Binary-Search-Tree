@@ -2,6 +2,9 @@
 #include <stdexcept>
 #include <sstream>
 #include <cstdlib>
+#include <iostream>
+
+using namespace std;
 
 struct node
 {
@@ -87,6 +90,7 @@ class Tree
     }
     bool remove(int num)
     {
+        // Case 1
     }
     int size()
     {
@@ -140,5 +144,16 @@ class Tree
     }
     void print()
     {
+        inOrder(rootNode);
+    }
+    void inOrder(node *root)
+    {
+        if (root == NULL)
+        {
+            return;
+        }
+        inOrder(root->left);
+        cout << root->value << ",";
+        inOrder(root->right);
     }
 };
