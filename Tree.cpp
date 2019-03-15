@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <sstream>
+#include <cstdlib>
 
 struct node
 {
@@ -37,45 +38,51 @@ class Tree
         }
     }
 
-    public:
-   
-   bool insert(int i){
-        if(rootNode->value == NULL){
-            rootNode=(node*)(malloc(sizeof(node)));
-            rootNode->value=i;
-            rootNode->parent=rootNode->left=rootNode->right=NULL;
+  public:
+    bool insert(int i)
+    {
+        if (rootNode->value == NULL)
+        {
+            rootNode = (node *)(malloc(sizeof(node)));
+            rootNode->value = i;
+            rootNode->parent = rootNode->left = rootNode->right = NULL;
             return true;
         }
-        node *temp=rootNode;
-        while (true){ 
-            if(i<temp->value){
-                node* prnt =temp;
+        node *temp = rootNode;
+        while (true)
+        {
+            if (i < temp->value)
+            {
+                node *prnt = temp;
                 temp = temp->left;
-                
-                if(temp->value=NULL){
-                    temp=(node*)(malloc(sizeof(node)));
-                    temp->parent=prnt;
-                    temp->left=temp->right=NULL;
+
+                if (temp->value = NULL)
+                {
+                    temp = (node *)(malloc(sizeof(node)));
+                    temp->parent = prnt;
+                    temp->left = temp->right = NULL;
                     numOfNodes++;
                     return true;
+                }
             }
-            }
-            else if(i>temp->value){
-                node* prnt =temp;
+            else if (i > temp->value)
+            {
+                node *prnt = temp;
                 temp = temp->right;
-                
-                if(temp->value=NULL){
-                    temp=(node*)(malloc(sizeof(node)));
-                    temp->parent=prnt;
-                    temp->left=temp->right=NULL;
+
+                if (temp->value == NULL)
+                {
+                    temp = (node *)(malloc(sizeof(node)));
+                    temp->parent = prnt;
+                    temp->left = temp->right = NULL;
                     numOfNodes++;
                     return true;
+                }
             }
-            }
-            else{
+            else
+            {
                 return false;
             }
-
         }
     }
     bool remove(int num)
