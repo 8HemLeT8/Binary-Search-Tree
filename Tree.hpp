@@ -1,37 +1,42 @@
 #pragma once
- 
+
 #include <cstdio>
 #include <stdexcept>
 #include <sstream>
 #include <cstdlib>
 #include <iostream>
-
-struct node
+struct Node
 {
     int value;
-    node *parent;
-    node *left;
-    node *right;
+    Node *parent;
+    Node *left;
+    Node *right;
+
+    Node(int key);
 };
+
+namespace ariel
+{
 
 class Tree
 {
-  private:
-    node *rootNode;
-    int numOfNodes;
+private:
+  Node *rootNode;
+  int numOfNodes;
 
-    node *search(int num);
-    node *SearchHelper(int num, node *curr);
+  Node *search(int num);
+  Node *SearchHelper(int num, Node *curr);
 
-  public:
-    bool insert(int i);
-    bool remove(int num);
-    int size();
-    bool contains(int num);
-    int root();
-    int parent(int num);
-    int left(int num);
-    int right(int num);
-    void print();
-    void inOrder(node *root);
+public:
+  bool insert(int i);
+  bool remove(int num);
+  int size();
+  bool contains(int num);
+  int root();
+  int parent(int num);
+  int left(int num);
+  int right(int num);
+  void print();
+  void inOrder(Node *root);
 };
+} // namespace ariel
