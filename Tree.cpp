@@ -1,13 +1,19 @@
 #include "Tree.hpp"
 using namespace std;
 
-    Tree::Node::Node(int val)
-    {
-        parent = NULL;
-        left = NULL;
-        right = NULL;
-        value = val;
-    };
+Tree::Node::Node(int val)
+{
+    parent = NULL;
+    left = NULL;
+    right = NULL;
+    value = val;
+};
+
+ariel::Tree::Tree()
+{
+    numOfNodes = 0;
+    rootNode = NULL;
+}
 
 Node *ariel::Tree::search(int num)
 {
@@ -29,66 +35,50 @@ Node *ariel::Tree::SearchHelper(int num, Node *curr)
         SearchHelper(num, curr->left);
     }
 }
-bool ariel::Tree::insert(int i)
+bool ariel::Tree::insert(int num)
 {
-    if (rootNode->value == NULL)
+    Node *toAdd = new Node(num);
+
+    Node *firstPointer = rootNode;
+
+    if (firstPointer == NULL)
     {
-        rootNode = (Node *)(malloc(sizeof(Node)));
-        rootNode->value = i;
-        rootNode->parent = rootNode->left = rootNode->right = NULL;
+        rootNode = toAdd;
         return true;
     }
-    Node *temp = rootNode;
-    while (true)
+
+    Node *secondPointer = NULL;
+
+    while (firstPointer != NULL)
     {
-        if (i < temp->value)
+        secondPointer = firstPointer;
+        if (num < firstPointer->value)
+            firstPointer = firstPointer->left;
+        if (firstPointer == NULL)
         {
-            Node *prnt = temp;
-            temp = temp->left;  
-
-            if (temp->value = NULL)
-            {
-                temp = (Node *)(malloc(sizeof(Node)));
-                temp->parent = prnt;
-                temp->left = temp->right = NULL;
-                numOfNodes++;
-                return true;
-            }
-        }
-        else if (i > temp->value)
-        {
-            Node *prnt = temp;
-            temp = temp->right;
-
-            if (temp->value == NULL)
-            {
-                temp = (Node *)(malloc(sizeof(Node)));
-                temp->parent = prnt;
-                temp->left = temp->right = NULL;
-                numOfNodes++;
-                return true;
-            }
+            secondPointer->left = toAdd;
         }
         else
+            firstPointer = firstPointer->right;
+        if (firstPointer == NULL)
         {
-            return false;
+            secondPointer->right = toAdd;
         }
     }
+    return true;
 }
 bool ariel::Tree::remove(int num)
-{   
+{
     // Case 0: not found
-    Node *temp = search(num)
-    if(temp == NULL)
+    Node *temp = search(num) if (temp == NULL)
     {
         std::ostringstream oss;
         oss << "The number " << num << " isn't in the tree";
         throw std::invalid_argument(oss.str());
     }
     // Case 1: leaf
-    if((temp->right == NULL) && (temp->left == NULL))
+    if ((temp->right == NULL) && (temp->left == NULL))
     {
-        
     }
 }
 int ariel::Tree::size()

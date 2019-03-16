@@ -28,6 +28,7 @@ private:
   Node *SearchHelper(int num, Node *curr);
 
 public:
+  Tree();
   bool insert(int i);
   bool remove(int num);
   int size();
