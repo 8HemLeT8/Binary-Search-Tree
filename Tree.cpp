@@ -36,7 +36,7 @@ Node *ariel::Tree::SearchHelper(int num, Node *curr)
         SearchHelper(num, curr->left);
     }
     // Will never reach this return
-    return;
+    return NULL;
 }
 
 bool ariel::Tree::insert(int num)
@@ -59,6 +59,7 @@ bool ariel::Tree::insert(int num)
         if (num < positionPointer->value)
         {
             positionPointer = positionPointer->left;
+            // Add to the left if its null
             if (positionPointer == NULL)
             {
                 parentPointer->left = toAdd;
@@ -68,6 +69,7 @@ bool ariel::Tree::insert(int num)
         else if (num > positionPointer->value)
         {
             positionPointer = positionPointer->right;
+            // Add to the right if its null
             if (positionPointer == NULL)
             {
                 parentPointer->right = toAdd;
@@ -81,6 +83,7 @@ bool ariel::Tree::insert(int num)
             return false;
         }
     }
+    // Return true if the addition was successful
     return true;
 }
 
