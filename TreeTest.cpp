@@ -16,19 +16,12 @@ int main() {
   threetree.insert(5);
   threetree.insert(7);
   threetree.insert(3);
-  threetree.print();
   ariel::Tree mytree;  
 
   badkan::TestCase tc("Binary tree");
   tc
   .CHECK_EQUAL (emptytree.size(), 0)
-
-  .print()
-
   .CHECK_OK    (emptytree.insert(5))
-
-  .print()
-
   .CHECK_EQUAL (emptytree.size(), 1)
   .CHECK_EQUAL (emptytree.contains(5), true)
   .CHECK_OK    (emptytree.remove(5))

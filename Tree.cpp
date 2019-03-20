@@ -10,10 +10,17 @@ Node::Node(int val)
     value = val;
 }
 
+Node::Node()
+{
+    parent = NULL;
+    left = NULL;
+    right = NULL;
+}
+
 ariel::Tree::Tree()
 {
     numOfNodes = 0;
-    rootNode = NULL;
+    rootNode = new Node();
 }
 
 Node *ariel::Tree::search(int num)
@@ -48,6 +55,7 @@ bool ariel::Tree::insert(int num)
     if (positionPointer == NULL)
     {
         rootNode = toAdd;
+        numOfNodes++;
         return true;
     }
     // second pointer to keep track of the parent
@@ -101,11 +109,13 @@ bool ariel::Tree::remove(int num)
         { //left child
             del->parent->left = NULL;
             delete del;
+            numOfNodes--;
         }
         else
-        {
-            del->parent->right = NULL; //right child
+        { //right child
+            del->parent->right = NULL;
             delete del;
+            numOfNodes--;
         }
     }
     else if (del->left == NULL || del->right == NULL)
@@ -114,11 +124,13 @@ bool ariel::Tree::remove(int num)
         { //del is right child
             del->parent->right = NULL;
             delete del;
+            numOfNodes--;
         }
         else
         { //del is left child
             del->parent->left = NULL;
             delete del;
+            numOfNodes--;
         }
     }
     else
@@ -133,6 +145,7 @@ bool ariel::Tree::remove(int num)
         del->value = temp->value;
         temp->parent->left = NULL;
         delete temp;
+        numOfNodes--;
     }
 }
 

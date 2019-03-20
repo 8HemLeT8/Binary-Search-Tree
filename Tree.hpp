@@ -15,6 +15,7 @@ struct Node
   Node *right;
   // Constructor
   Node(int num);
+  Node();
 };
 
 namespace ariel
