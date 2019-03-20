@@ -1,3 +1,4 @@
+// Include only once
 #pragma once
 
 #include <cstdio>
@@ -5,14 +6,15 @@
 #include <sstream>
 #include <cstdlib>
 #include <iostream>
+
 struct Node
 {
-    int value;
-    Node *parent;
-    Node *left;
-    Node *right;
-
-    Node(int key);
+  int value;
+  Node *parent;
+  Node *left;
+  Node *right;
+  // Constructor
+  Node(int num);
 };
 
 namespace ariel
@@ -21,15 +23,20 @@ namespace ariel
 class Tree
 {
 private:
+  // Tree head
   Node *rootNode;
+  // Tree size
   int numOfNodes;
-
+  // Helper functions
   Node *search(int num);
   Node *SearchHelper(int num, Node *curr);
+  void inOrder(Node *root);
 
 public:
+  // Constructors
   Tree();
-  bool insert(int i);
+  // Tree operations
+  bool insert(int num);
   bool remove(int num);
   int size();
   bool contains(int num);
@@ -38,6 +45,5 @@ public:
   int left(int num);
   int right(int num);
   void print();
-  void inOrder(Node *root);
 };
 } // namespace ariel
