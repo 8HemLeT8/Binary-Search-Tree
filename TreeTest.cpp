@@ -16,6 +16,7 @@ int main() {
   threetree.insert(5);
   threetree.insert(7);
   threetree.insert(3);
+
   ariel::Tree mytree;  
 
   badkan::TestCase tc("Binary tree");

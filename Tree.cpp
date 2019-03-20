@@ -20,7 +20,7 @@ Node::Node()
 ariel::Tree::Tree()
 {
     numOfNodes = 0;
-    rootNode = new Node();
+    rootNode = NULL;
 }
 
 Node *ariel::Tree::search(int num)
@@ -36,14 +36,12 @@ Node *ariel::Tree::SearchHelper(int num, Node *curr)
     }
     if (num > curr->value)
     {
-        SearchHelper(num, curr->right);
+        return SearchHelper(num, curr->right);
     }
     else
     {
-        SearchHelper(num, curr->left);
+        return SearchHelper(num, curr->left);
     }
-    // Will never reach this return
-    return NULL;
 }
 
 bool ariel::Tree::insert(int num)
@@ -70,6 +68,7 @@ bool ariel::Tree::insert(int num)
             // Add to the left if its null
             if (positionPointer == NULL)
             {
+                toAdd->parent = parentPointer;
                 parentPointer->left = toAdd;
                 numOfNodes++;
             }
@@ -80,6 +79,7 @@ bool ariel::Tree::insert(int num)
             // Add to the right if its null
             if (positionPointer == NULL)
             {
+                toAdd->parent = parentPointer;
                 parentPointer->right = toAdd;
                 numOfNodes++;
             }
@@ -103,6 +103,12 @@ bool ariel::Tree::remove(int num)
         //ERROR NO NODE FOUND
         throw "No such number to remove";
     }
+    if (del->parent == NULL)
+    {
+        delete del;
+        numOfNodes--;
+        return true;
+    }
     if (del->left == NULL && del->right == NULL)
     { //if its a leaf
         if (del->value < del->parent->value)
@@ -110,12 +116,15 @@ bool ariel::Tree::remove(int num)
             del->parent->left = NULL;
             delete del;
             numOfNodes--;
+            return true;
         }
+
         else
         { //right child
             del->parent->right = NULL;
             delete del;
             numOfNodes--;
+            return true;
         }
     }
     else if (del->left == NULL || del->right == NULL)
@@ -125,12 +134,14 @@ bool ariel::Tree::remove(int num)
             del->parent->right = NULL;
             delete del;
             numOfNodes--;
+            return true;
         }
         else
         { //del is left child
             del->parent->left = NULL;
             delete del;
             numOfNodes--;
+            return true;
         }
     }
     else
@@ -146,6 +157,7 @@ bool ariel::Tree::remove(int num)
         temp->parent->left = NULL;
         delete temp;
         numOfNodes--;
+        return true;
     }
 }
 
@@ -176,6 +188,10 @@ int ariel::Tree::parent(int num)
     {
         throw "The number isn't in the tree";
     }
+    if (temp->parent == NULL)
+    {
+        throw "No parent";
+    }
     return temp->parent->value;
 }
 
@@ -185,6 +201,10 @@ int ariel::Tree::left(int num)
     if (temp == NULL)
     {
         throw "The number isn't in the tree";
+    }
+    if (temp->left == NULL)
+    {
+        throw "No left child";
     }
     return temp->left->value;
 }
@@ -196,6 +216,10 @@ int ariel::Tree::right(int num)
     {
         throw "The number isn't in the tree";
     }
+    if (temp->right == NULL)
+    {
+        throw "No right child";
+    }
     return temp->right->value;
 }
 
@@ -206,11 +230,20 @@ void ariel::Tree::print()
 
 void ariel::Tree::inOrder(Node *root)
 {
-    if (root == NULL)
+    if (root != NULL)
     {
-        return;
+        if (root->left)
+        {
+            inOrder(root->left);
+            cout << ", ";
+        }
+
+        cout << root->value;
+
+        if (root->right)
+        {
+            cout << ", ";
+            inOrder(root->right);
+        }
     }
-    inOrder(root->left);
-    cout << root->value << ",";
-    inOrder(root->right);
 }
