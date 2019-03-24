@@ -16,8 +16,6 @@ struct Node
   // Constructor
   Node(int num);
   Node();
-  // Deconstructors
-  ~Node();
 };
 
 namespace ariel
@@ -33,7 +31,10 @@ private:
   // Helper functions
   Node *search(int num);
   Node *SearchHelper(int num, Node *curr);
-  void inOrder(Node *root);
+  void inOrder(Node *root) const;
+  Node *FindNext(int num);
+  Node *FindNext(Node *curr);
+  void DestroyTree(Node* curr);
 
 public:
   // Constructors
@@ -49,6 +50,6 @@ public:
   int parent(int num);
   int left(int num);
   int right(int num);
-  void print();
+  void print() const;
 };
 } // namespace ariel

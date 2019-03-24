@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Node::Node(int val) //counstructor
+Node::Node(int val) // Counstructor with value
 {
     parent = NULL;
     left = NULL;
@@ -10,39 +10,40 @@ Node::Node(int val) //counstructor
     value = val;
 }
 
-Node::Node() //counstructor
+Node::Node() // Empty counstructor
 {
     parent = NULL;
     left = NULL;
     right = NULL;
 }
 
-Node::~Node() // Deconstructor
-{
-    if (left)
-        delete left;
-    if (right)
-        delete right;
-}
-
-ariel::Tree::Tree() //counstructor
+ariel::Tree::Tree() // Tree counstructor
 {
     numOfNodes = 0;
     rootNode = NULL;
 }
 
-ariel::Tree::~Tree() // Deconstructor
+void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current node
 {
-    if (rootNode)
-        delete rootNode;
+    if (curr)
+    {
+        DestroyTree(curr->left);
+        DestroyTree(curr->right);
+        delete curr;
+    }
 }
 
-Node *ariel::Tree::search(int num) //return the node with the *num* value
+ariel::Tree::~Tree() // Deconstructor for tree
+{
+    DestroyTree(rootNode);
+}
+
+Node *ariel::Tree::search(int num) // Return the node with the num value
 {
     return SearchHelper(num, rootNode);
 }
-// Binary search
-Node *ariel::Tree::SearchHelper(int num, Node *curr)
+
+Node *ariel::Tree::SearchHelper(int num, Node *curr) // Binary tree
 {
     if (curr == NULL || curr->value == num)
     {
@@ -50,12 +51,28 @@ Node *ariel::Tree::SearchHelper(int num, Node *curr)
     }
     if (num > curr->value)
     {
-        return SearchHelper(num, curr->right); //research on the right child
+        return SearchHelper(num, curr->right); //research on the right sub-tree
     }
     else
     {
-        return SearchHelper(num, curr->left); //research on the left child
+        return SearchHelper(num, curr->left); //research on the left sub-trr
     }
+}
+
+Node *ariel::Tree::FindNext(int num) // Find the next number after num using number
+{
+    Node *curr = search(num);
+    return FindNext(curr);
+}
+
+Node *ariel::Tree::FindNext(Node *curr) // Find the next number after num using current node
+{
+    Node *next = curr->right;
+    while (next->left != NULL)
+    {
+        next = next->left;
+    }
+    return next;
 }
 
 bool ariel::Tree::insert(int num)
@@ -237,27 +254,29 @@ int ariel::Tree::right(int num) //return value of the left child
     return temp->right->value;
 }
 
-void ariel::Tree::print() //print the tree inorder values
+void ariel::Tree::print() const //print the tree inorder values
 {
+    cout << endl;
     inOrder(rootNode);
+    cout << endl;
 }
 
-void ariel::Tree::inOrder(Node *root) //scan the tree from left to right and print it
+void ariel::Tree::inOrder(Node *root) const // Print each subtree seperated by a comma
 {
     if (root != NULL)
     {
         if (root->left)
         {
-            inOrder(root->left); //scan left
+            inOrder(root->left); // Left subtree
             cout << ", ";
         }
 
-        cout << root->value; //print
+        cout << root->value; // Print the value
 
-        if (root->right) //print right
+        if (root->right)
         {
             cout << ", ";
-            inOrder(root->right);
+            inOrder(root->right); // Right subtree
         }
     }
 }
