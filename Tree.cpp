@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Node::Node(int val)     //counstructor
+Node::Node(int val) //counstructor
 {
     parent = NULL;
     left = NULL;
@@ -10,37 +10,51 @@ Node::Node(int val)     //counstructor
     value = val;
 }
 
-Node::Node()            //counstructor
+Node::Node() //counstructor
 {
     parent = NULL;
     left = NULL;
     right = NULL;
 }
 
-ariel::Tree::Tree()     //counstructor
+Node::~Node() // Deconstructor
+{
+    if (left)
+        delete left;
+    if (right)
+        delete right;
+}
+
+ariel::Tree::Tree() //counstructor
 {
     numOfNodes = 0;
     rootNode = NULL;
 }
 
-Node *ariel::Tree::search(int num)  //return the node with the *num* value
+ariel::Tree::~Tree() // Deconstructor
+{
+    if (rootNode)
+        delete rootNode;
+}
+
+Node *ariel::Tree::search(int num) //return the node with the *num* value
 {
     return SearchHelper(num, rootNode);
 }
 // Binary search
 Node *ariel::Tree::SearchHelper(int num, Node *curr)
 {
-    if (curr == NULL || curr->value == num)         
+    if (curr == NULL || curr->value == num)
     {
         return curr;
     }
     if (num > curr->value)
     {
-        return SearchHelper(num, curr->right);       //research on the right child
+        return SearchHelper(num, curr->right); //research on the right child
     }
     else
     {
-        return SearchHelper(num, curr->left);       //research on the left child
+        return SearchHelper(num, curr->left); //research on the left child
     }
 }
 
@@ -110,9 +124,9 @@ bool ariel::Tree::remove(int num)
         return true;
     }
     if (del->left == NULL && del->right == NULL)
-    {                                           //if its a leaf
-        if (del->value < del->parent->value)  //is del a left child
-        { //left child
+    {                                        //if its a leaf
+        if (del->value < del->parent->value) //is del a left child
+        {                                    //left child
             del->parent->left = NULL;
             delete del;
             numOfNodes--;
@@ -120,24 +134,24 @@ bool ariel::Tree::remove(int num)
         }
 
         else
-        {                               //right child
+        { //right child
             del->parent->right = NULL;
             delete del;
             numOfNodes--;
             return true;
         }
     }
-    else if (del->left == NULL || del->right == NULL)  
-    {                                       //if it has 1 child
+    else if (del->left == NULL || del->right == NULL)
+    { //if it has 1 child
         if (del->parent->right == del)
-        {                                   //del is right child
+        { //del is right child
             del->parent->right = NULL;
             delete del;
             numOfNodes--;
             return true;
         }
         else
-        {                                   //del is left child
+        { //del is left child
             del->parent->left = NULL;
             delete del;
             numOfNodes--;
@@ -145,9 +159,9 @@ bool ariel::Tree::remove(int num)
         }
     }
     else
-    {                                   //2 children
+    { //2 children
         Node *temp = del->right;
-        while (temp->left != NULL)  //find the following value
+        while (temp->left != NULL) //find the following value
         {
             del = temp;
             temp = temp->left;
@@ -161,14 +175,14 @@ bool ariel::Tree::remove(int num)
     }
 }
 
-int ariel::Tree::size()      //return size of the tree
+int ariel::Tree::size() //return size of the tree
 {
     return numOfNodes;
 }
 
-bool ariel::Tree::contains(int num)    //return boolean whether the tree contains node with value num
+bool ariel::Tree::contains(int num) //return boolean whether the tree contains node with value num
 {
-    Node *temp = search(num);   
+    Node *temp = search(num);
     if (temp == NULL)
     {
         return false;
@@ -176,12 +190,12 @@ bool ariel::Tree::contains(int num)    //return boolean whether the tree contain
     return true;
 }
 
-int ariel::Tree::root()   //return value of the root
+int ariel::Tree::root() //return value of the root
 {
     return rootNode->value;
 }
 
-int ariel::Tree::parent(int num)       //return value of the parent of num
+int ariel::Tree::parent(int num) //return value of the parent of num
 {
     Node *temp = search(num);
     if (temp == NULL)
@@ -195,7 +209,7 @@ int ariel::Tree::parent(int num)       //return value of the parent of num
     return temp->parent->value;
 }
 
-int ariel::Tree::left(int num)          //return value of the left child
+int ariel::Tree::left(int num) //return value of the left child
 {
     Node *temp = search(num);
     if (temp == NULL)
@@ -209,7 +223,7 @@ int ariel::Tree::left(int num)          //return value of the left child
     return temp->left->value;
 }
 
-int ariel::Tree::right(int num)       //return value of the left child
+int ariel::Tree::right(int num) //return value of the left child
 {
     Node *temp = search(num);
     if (temp == NULL)
@@ -223,7 +237,7 @@ int ariel::Tree::right(int num)       //return value of the left child
     return temp->right->value;
 }
 
-void ariel::Tree::print()   //print the tree inorder values
+void ariel::Tree::print() //print the tree inorder values
 {
     inOrder(rootNode);
 }
@@ -234,13 +248,13 @@ void ariel::Tree::inOrder(Node *root) //scan the tree from left to right and pri
     {
         if (root->left)
         {
-            inOrder(root->left);   //scan left
+            inOrder(root->left); //scan left
             cout << ", ";
         }
 
-        cout << root->value;       //print
+        cout << root->value; //print
 
-        if (root->right)            //print right
+        if (root->right) //print right
         {
             cout << ", ";
             inOrder(root->right);

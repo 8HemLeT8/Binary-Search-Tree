@@ -16,6 +16,8 @@ struct Node
   // Constructor
   Node(int num);
   Node();
+  // Deconstructors
+  ~Node();
 };
 
 namespace ariel
@@ -36,6 +38,8 @@ private:
 public:
   // Constructors
   Tree();
+  // Deconstructors
+  ~Tree();
   // Tree operations
   bool insert(int num);
   bool remove(int num);
