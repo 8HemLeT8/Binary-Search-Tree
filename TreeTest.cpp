@@ -72,12 +72,18 @@ int main()
       // Check left function
       .CHECK_EQUAL(fbtree.left(444), 110)
       .CHECK_OK(fbtree.print())
+      // Check contains function
+      .CHECK_EQUAL(fbtree.contains(5), false)
+      .CHECK_EQUAL(fbtree.contains(666), true) 
+      .CHECK_EQUAL(fbtree.contains(444), true)
+      .CHECK_EQUAL(fbtree.contains(110), true)
+      .CHECK_EQUAL(fbtree.contains(555), true)
       // Check remove function
-      .CHECK_OK(emptytree.remove(110))
+      .CHECK_OK(fbtree.remove(110))
       .CHECK_OK(fbtree.print())
-      .CHECK_OK(emptytree.remove(444))
+      .CHECK_OK(fbtree.remove(444))
       .CHECK_OK(fbtree.print())
-      .CHECK_OK(emptytree.remove(666))
+      .CHECK_OK(fbtree.remove(666))
       .CHECK_OK(fbtree.print())
       .print();
 
