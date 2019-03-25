@@ -178,18 +178,18 @@ bool ariel::Tree::remove(int num)
         numOfNodes--;
         return true;
     }
-    else
+    else if (del->left != NULL && del->right != NULL)
     {
         // look for inorder successor
         Node *next = FindNextNode(del);
         int temp = next->value;
         // Use recursive call to delete the next node
-        cout << "seg here?" << endl;
         remove(temp);
         // Change value
         del->value = temp;
         return true;
     }
+    return false;
 }
 
 int ariel::Tree::size() //return size of the tree
