@@ -32,8 +32,8 @@ private:
   Node *search(int num);
   Node *SearchHelper(int num, Node *curr);
   void inOrder(Node *root) const;
-  Node *FindNext(int num);
-  Node *FindNext(Node *curr);
+  Node *FindNextNum(int num);
+  Node *FindNextNode(Node *curr);
   void DestroyTree(Node* curr);
 
 public:
