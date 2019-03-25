@@ -144,7 +144,6 @@ bool ariel::Tree::remove(int num)
         // Node is root
         else
         {
-            cout << "debug" << endl;
             rootNode = NULL;
         }
         delete del;
@@ -210,7 +209,8 @@ bool ariel::Tree::contains(int num) //return boolean whether the tree contains n
 
 int ariel::Tree::root() //return value of the root
 {
-    
+    if (rootNode == NULL)
+        throw "No root node";
     return rootNode->value;
 }
 
