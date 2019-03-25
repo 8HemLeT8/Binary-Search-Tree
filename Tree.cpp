@@ -77,8 +77,6 @@ Node *ariel::Tree::FindNextNode(Node *curr) // Find the next number after num us
 
 bool ariel::Tree::insert(int num)
 {
-    cout << "in insert" << endl;
-
     // First pointer to keep track of where to insert the number
     Node *positionPointer = rootNode;
     // If the tree is empty add to the head of the tree
@@ -129,8 +127,6 @@ bool ariel::Tree::insert(int num)
 
 bool ariel::Tree::remove(int num)
 {
-    cout << "in remove" << endl;
-
     Node *del = search(num);
     // If the number doesnt exist
     if (del == NULL)
@@ -148,6 +144,7 @@ bool ariel::Tree::remove(int num)
         // Node is root
         else
         {
+            cout << "debug" << endl;
             rootNode = NULL;
         }
         delete del;
@@ -198,15 +195,11 @@ bool ariel::Tree::remove(int num)
 
 int ariel::Tree::size() //return size of the tree
 {
-    cout << "in size" << endl;
-
     return numOfNodes;
 }
 
 bool ariel::Tree::contains(int num) //return boolean whether the tree contains node with value num
 {
-    cout << "in contains" << endl;
-
     Node *temp = search(num);
     if (temp == NULL)
     {
@@ -217,15 +210,12 @@ bool ariel::Tree::contains(int num) //return boolean whether the tree contains n
 
 int ariel::Tree::root() //return value of the root
 {
-    cout << "in root" << endl;
     
     return rootNode->value;
 }
 
 int ariel::Tree::parent(int num) //return value of the parent of num
 {
-    cout << "in parent" << endl;
-
     Node *temp = search(num);
     if (temp == NULL)
     {
@@ -240,8 +230,6 @@ int ariel::Tree::parent(int num) //return value of the parent of num
 
 int ariel::Tree::left(int num) //return value of the left child
 {
-    cout << "in left" << endl;
-
     Node *temp = search(num);
     if (temp == NULL)
     {
@@ -256,8 +244,6 @@ int ariel::Tree::left(int num) //return value of the left child
 
 int ariel::Tree::right(int num) //return value of the left child
 {
-    cout << "in right" << endl;
-
     Node *temp = search(num);
     if (temp == NULL)
     {
@@ -272,7 +258,6 @@ int ariel::Tree::right(int num) //return value of the left child
 
 void ariel::Tree::print() const //print the tree inorder values
 {
-    cout << "in print" << endl;
     cout << endl;
     if (rootNode == NULL)
         cout << "Tree is empty";
