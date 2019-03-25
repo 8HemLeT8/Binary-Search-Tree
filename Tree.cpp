@@ -218,8 +218,7 @@ bool ariel::Tree::contains(int num) //return boolean whether the tree contains n
 int ariel::Tree::root() //return value of the root
 {
     cout << "in root" << endl;
-    if (rootNode == NULL)
-        throw "No root node";
+    
     return rootNode->value;
 }
 
