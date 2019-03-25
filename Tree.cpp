@@ -184,7 +184,6 @@ bool ariel::Tree::remove(int num)
         Node *next = FindNextNode(del);
         int temp = next->value;
         // Use recursive call to delete the next node
-        cout << "seg here?" << endl;
         remove(temp);
         // Change value
         del->value = temp;
